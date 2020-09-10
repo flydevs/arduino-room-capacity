@@ -4,7 +4,7 @@ int MAXAMOUNT = 8;
 int COUNT = 0;
 int ButtonIncrement = 0;
 int ButtonDecrement = 0;
-int MaxDetection = 200;
+int MaxDetection = 100;
 int ButtonDelay = 200;
 int buttonCountDelay = 0;
 long Distance1;
@@ -41,14 +41,18 @@ void loop() {
   ButtonIncrement=digitalRead(11);
   ButtonDecrement=digitalRead(8); 
 
-  // Sensors
+  // Sensor 1
   digitalWrite(10,LOW); //recibimiento del pulso.
-  digitalWrite(13,LOW); //recibimiento del pulso.
   delayMicroseconds(5);
   digitalWrite(10, HIGH);//envió del pulso.
-  digitalWrite(13, HIGH);//envió del pulso.
   delayMicroseconds(10);
   receiver1=pulseIn(9, HIGH);//fórmula para medir el pulso entrante.
+  // Sensor 2
+  delayMicroseconds(5);
+  digitalWrite(13,LOW); //recibimiento del pulso.
+  delayMicroseconds(5);
+  digitalWrite(13, HIGH);//envió del pulso.
+  delayMicroseconds(10);  
   receiver2=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
   
   Distance1=long(0.017*receiver1);//fórmula para calcular la distancia del sensor ultrasónico.

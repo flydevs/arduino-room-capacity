@@ -5,7 +5,7 @@ int COUNT = 0;
 int ButtonIncrement = 0;
 int ButtonDecrement = 0;
 int MaxDetection = 100;
-int ButtonDelay = 200;
+int ButtonDelay = 100;
 int buttonCountDelay = 0;
 long Distance1;
 long Distance2;
@@ -60,53 +60,30 @@ void loop() {
 
   sensor1 = Distance1>0 and Distance1<MaxDetection;
   sensor2 = Distance2>0 and Distance2<MaxDetection;
-/*
-  Serial.println("Sensor 1: ");
-  Serial.println(sensor1);
-  Serial.println("Sensor 2: ");
-  Serial.println(sensor2);*/
 
-
+  // INFORM BY DISPLAY
   
   lcd.clear();
   lcd.setCursor(0,0); 
   lcd.print(Distance1);
   
   lcd.setCursor(3,0);
-  lcd.print(" - ");
+  lcd.print("/");
   lcd.print(Distance2);
   
   lcd.setCursor(9,0);
-  lcd.print("CM");
-
-   
-  lcd.setCursor(0,1); 
+  lcd.print("[");
   lcd.print(sensor1);
-  
-  lcd.setCursor(1,1);
-  lcd.print(" / ");
+  lcd.print(",");
   lcd.print(sensor2);
+  lcd.print("]");
 
-    
-  lcd.setCursor(9,1);
-  lcd.print("LIGHT");
-  /*
-  if(Distance1<MaxDetection){ //comparativo para la alarma se ingresa la distancia en la que encenderá o apagara.
-    digitalWrite(13, HIGH);
-    COUNT = COUNT + 1;
-    lcd.clear();
-    lcd.setCursor(0,0);
+
+    lcd.setCursor(0,1);
     lcd.print("R: ");
     lcd.print(COUNT);
     lcd.print(" MAX: ");
     lcd.print(MAXAMOUNT);
-  }
-  else
-  {
-    digitalWrite(13,LOW);
-  }
-  */
-
   // Botones
 
 
@@ -118,8 +95,8 @@ void loop() {
     if ((ButtonIncrement == HIGH)){
       MAXAMOUNT=MAXAMOUNT+1;
       lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("PAX: ");
+      lcd.setCursor(0,1);
+      lcd.print("R: ");
       lcd.print(COUNT);
       lcd.print(" MAX: ");
       lcd.print(MAXAMOUNT);
@@ -128,7 +105,7 @@ void loop() {
     if ((ButtonDecrement == HIGH) && (MAXAMOUNT != 0)){
       MAXAMOUNT=MAXAMOUNT-1;
       lcd.clear();
-      lcd.setCursor(0,0);
+      lcd.setCursor(0,1);
       lcd.print("R: ");
       lcd.print(COUNT);
       lcd.print(" MAX: ");

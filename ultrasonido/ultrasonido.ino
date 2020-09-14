@@ -32,8 +32,7 @@ void setup() {
   // SCREEN
   lcd.begin(16,2);
   lcd.setCursor(0,0);
-  lcd.print("WELCOME!"); 
-  Serial.begin(115200);
+  lcd.print("WELCOME!");  
 }
 
 void loop() {
@@ -47,8 +46,8 @@ void loop() {
   digitalWrite(10, HIGH);//envió del pulso.
   delayMicroseconds(10);
   receiver1=pulseIn(9, HIGH);//fórmula para medir el pulso entrante.
-  // Sensor 2
-  delayMicroseconds(5);
+  // Sensor 2 
+  delay(1);
   digitalWrite(13,LOW); //recibimiento del pulso.
   delayMicroseconds(5);
   digitalWrite(13, HIGH);//envió del pulso.
@@ -113,5 +112,5 @@ void loop() {
     }
   }
   
-  delay(50);
+  delay(10);
 }

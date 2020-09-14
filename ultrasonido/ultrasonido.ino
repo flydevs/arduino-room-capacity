@@ -1,5 +1,7 @@
 
 #include <LiquidCrystal.h> // Incluye la Libreria LiquidCrystal
+#include <Ultrasonic.h> //
+
 int MAXAMOUNT = 8;
 int COUNT = 0;
 int ButtonIncrement = 0;
@@ -16,14 +18,12 @@ bool sensor2 = false;
 int lastState=0;
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7); // Crea un Objeto LC. Parametros: (rs, enable, d4, d5, d6, d7) 
- 
+
+Ultrasonic ultrasonic1(10, 9);  // An ultrasonic sensor HC-04 
+Ultrasonic ultrasonic2(13, 12);  // An ultrasonic sensor HC-04 
 void setup() {
-  // Sensor 1
-  pinMode(10, OUTPUT); //salida del pulso generado por el sensor ultrasónico
-  pinMode(9, INPUT);//entrada del pulso generado por el sensor ultrasónico
-  // Sensor 2 
-  pinMode(13, OUTPUT); //salida del pulso generado por el sensor ultrasónico
-  pinMode(12, INPUT);//entrada del pulso generado por el sensor ultrasónico
+  
+
 
   // BUTTONS
   pinMode(8,INPUT);
@@ -40,22 +40,10 @@ void loop() {
   ButtonIncrement=digitalRead(11);
   ButtonDecrement=digitalRead(8); 
 
-  // Sensor 1
-  digitalWrite(10,LOW); //recibimiento del pulso.
-  delayMicroseconds(5);
-  digitalWrite(10, HIGH);//envió del pulso.
-  delayMicroseconds(10);
-  receiver1=pulseIn(9, HIGH);//fórmula para medir el pulso entrante.
-  // Sensor 2 
-  delay(1);
-  digitalWrite(13,LOW); //recibimiento del pulso.
-  delayMicroseconds(5);
-  digitalWrite(13, HIGH);//envió del pulso.
-  delayMicroseconds(10);  
-  receiver2=pulseIn(12, HIGH);//fórmula para medir el pulso entrante.
   
-  Distance1=long(0.017*receiver1);//fórmula para calcular la distancia del sensor ultrasónico.
-  Distance2=long(0.017*receiver2);//fórmula para calcular la distancia del sensor ultrasónico.
+  
+  Distance1=ultrasonic1.read();//fórmula para calcular la distancia del sensor ultrasónico.
+  Distance2=ultrasonic2.read();//fórmula para calcular la distancia del sensor ultrasónico.
 
   sensor1 = Distance1>0 and Distance1<MaxDetection;
   sensor2 = Distance2>0 and Distance2<MaxDetection;
